@@ -1,4 +1,28 @@
 import { useEffect, useState } from "react";
+import { styled } from "styled-components";
+
+const HomeContainer = styled.section`
+    padding: 60px;
+    & h1{
+        font-size: 36px;
+        margin-bottom: 16px;
+    }
+    & .cards{
+        display: flex;
+        gap: 20px;
+        & li{
+            width: calc(20% - 16px);
+            box-shadow: 0 5px 10px #00000025;
+            border-radius: 10px;
+            padding: 10px;
+            & h5{
+                font-size: 16px;
+                font-weight: bold;
+                color: #6B0504;
+            }
+        }
+    }
+`
 
 const Home = () => {
 
@@ -15,8 +39,24 @@ const Home = () => {
     }, [])
 
     return (
-        <>
+        <HomeContainer>
             <h1>Pizzas em destaque</h1>
+            <ul className="cards">
+                {
+                    pizzas &&  pizzas.filter(p => p.promocao).map(p => (
+                        <li>
+                            <img src="" alt="" />
+                            <h5>{p.nome}</h5>
+                            <p>{p.descricao}</p>
+                            <div className="preco">
+                                <h6>{p.preco} <button>adicionar</button></h6>
+                            </div>
+                        </li>
+                    ))
+                }
+            </ul>
+
+            <h1>Todos os sabores</h1>
             {
                 pizzas &&  pizzas.map(p => (
                     <div>
@@ -24,7 +64,7 @@ const Home = () => {
                     </div>
                 ))
             }
-        </>
+        </HomeContainer>
     );
 }
  
